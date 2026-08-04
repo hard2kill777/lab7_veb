@@ -10,42 +10,39 @@ const selectedDishes = {
     dessert: null
 };
 
-// ========== ЗАГРУЗКА ДАННЫХ ==========
+// ========== ЗАГРУЗКА ДАННЫХ (ЧИСТО ЛОКАЛЬНО + ФОНОВОЙ API) ==========
 async function loadDishes() {
-    // Пытаемся загрузить с сервера Политеха (для выполнения задания)
-    const apiUrl = 'https://cors-proxy.htmldog.workers.dev/?https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+    // 1. МГНОВЕННО загружаем локальные данные
+    if (typeof dishesBackup !== 'undefined' && dishesBackup.length > 0) {
+        dishes = dishesBackup;
+        console.log("Данные загружены из локального файла data.js");
+        renderMenu();
+        updateOrderUI();
+    } else {
+        const mainElement = document.querySelector('main');
+        if (mainElement) {
+            mainElement.innerHTML = `<div style="text-align: center; padding: 50px;">Ошибка: не найден локальный файл data.js</div>`;
+        }
+        return;
+    }
+
+
+    
+    // ВАЖНО: Эта ссылка строго по заданию для хостингов типа Render/Netlify
+    const apiUrl = 'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
     
     try {
         const response = await fetch(apiUrl);
         if (response.ok) {
             const data = await response.json();
             dishes = data;
-            console.log("Данные успешно загружены с API Политеха!");
+            console.log("Данные обновлены с сервера Политеха!");
             renderMenu();
             updateOrderUI();
-            return;
         }
     } catch (error) {
-        console.warn("Сервер Политеха не ответил. Используем локальный файл data.js.");
-    }
-
-    // Если сервер не ответил, используем локальный файл
-    if (typeof dishesBackup !== 'undefined' && dishesBackup.length > 0) {
-        dishes = dishesBackup;
-        console.log("Данные загружены из локального файла data.js.");
-        renderMenu();
-        updateOrderUI();
-    } else {
-        // Если даже локального файла нет
-        const mainElement = document.querySelector('main');
-        if (mainElement) {
-            mainElement.innerHTML = `
-                <div style="text-align: center; padding: 50px; background: #fff; border-radius: 20px; max-width: 600px; margin: 20px auto;">
-                    <h2>😔 Ошибка загрузки меню</h2>
-                    <p style="color: #666;">Не удалось загрузить данные. Проверьте наличие файла data.js в папке проекта.</p>
-                </div>
-            `;
-        }
+        // Игнорируем ошибку, так как сайт уже работает на локальных данных
+        console.log("Сервер Политеха не ответил. Работаем локально.");
     }
 }
 
