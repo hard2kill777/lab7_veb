@@ -15,9 +15,8 @@ const selectedDishes = {
 // ЛР 7: ФУНКЦИЯ ЗАГРУЗКИ ДАННЫХ С СЕРВЕРА (API)
 // ==========================================
 async function loadDishes() {
-    // ВАЖНО: Если вы используете хостинг Политеха, замените эту ссылку на свою:
-    // const apiUrl = 'http://lab7-api.std-900.ist.mospolytech.ru/api/dishes';
-    const apiUrl = 'https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+    
+    const apiUrl = 'https://corsproxy.io/?https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
 
     try {
         const response = await fetch(apiUrl);
