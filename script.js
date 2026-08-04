@@ -10,13 +10,14 @@ const selectedDishes = {
     dessert: null
 };
 
-// ========== ЗАГРУЗКА ДАННЫХ (УСТОЙЧИВАЯ ВЕРСИЯ) ==========
+// ========== ЗАГРУЗКА ДАННЫХ (С ЗАПАСНЫМ ПЛАНОМ) ==========
 async function loadDishes() {
-    
     const apiUrl = 'https://cors-proxy.htmldog.workers.dev/?https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
     const mainElement = document.querySelector('main');
+    let dataLoaded = false;
 
     try {
+        console.log("Пытаюсь загрузить данные с сервера Политеха...");
         const response = await fetch(apiUrl);
         
         if (!response.ok) {
@@ -24,26 +25,35 @@ async function loadDishes() {
         }
 
         const data = await response.json();
-        dishes = data; // Сохраняем полученные данные
-
-        // Если данные пришли, запускаем отрисовку
-        renderMenu();
-        updateOrderUI();
+        dishes = data;
+        dataLoaded = true;
+        console.log("Данные успешно загружены с API!");
 
     } catch (error) {
-        console.error('Ошибка при загрузке блюд:', error);
-        
-        // Если загрузка не удалась, показываем сообщение
+        console.warn('Не удалось загрузить с сервера. Использую локальный файл data.js.');
+        console.error(error);
+    }
+
+    // Если данные с сервера не пришли, берем из резервного файла
+    if (!dataLoaded && typeof dishesBackup !== 'undefined') {
+        dishes = dishesBackup;
+        console.log("Данные загружены из локального файла.");
+    } else if (!dataLoaded) {
+        // Если и файла нет, показываем ошибку
         if (mainElement) {
             mainElement.innerHTML = `
                 <div style="text-align: center; padding: 50px; background: #fff; border-radius: 20px; max-width: 600px; margin: 20px auto;">
-                    <h2>😔 Не удалось загрузить меню</h2>
-                    <p style="color: #666;">Сервер временно недоступен. Пожалуйста, обновите страницу через несколько секунд.</p>
-                    <button onclick="location.reload()" style="padding: 10px 20px; margin-top: 20px; background: tomato; color: #fff; border: none; border-radius: 10px; cursor: pointer;">Обновить страницу</button>
+                    <h2>😔 Ошибка загрузки меню</h2>
+                    <p style="color: #666;">Не удалось загрузить данные ни с сервера, ни локально.</p>
                 </div>
             `;
         }
+        return;
     }
+
+    // Запускаем отрисовку
+    renderMenu();
+    updateOrderUI();
 }
 
 // ========== ОТРИСОВКА ==========
