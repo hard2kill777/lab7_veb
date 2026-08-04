@@ -1,6 +1,5 @@
-﻿// script.js
+// script.js
 
-// Убираем локальный массив dishes. Данные будем хранить в переменной после загрузки.
 let dishes = [];
 
 const selectedDishes = {
@@ -11,12 +10,11 @@ const selectedDishes = {
     dessert: null
 };
 
-// ==========================================
-// ЛР 7: ФУНКЦИЯ ЗАГРУЗКИ ДАННЫХ С СЕРВЕРА (API)
-// ==========================================
+// ========== ЗАГРУЗКА ДАННЫХ (УСТОЙЧИВАЯ ВЕРСИЯ) ==========
 async function loadDishes() {
     
     const apiUrl = 'https://cors-proxy.htmldog.workers.dev/?https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+    const mainElement = document.querySelector('main');
 
     try {
         const response = await fetch(apiUrl);
@@ -26,31 +24,29 @@ async function loadDishes() {
         }
 
         const data = await response.json();
-        dishes = data; // Сохраняем полученные данные в глобальную переменную
+        dishes = data; // Сохраняем полученные данные
 
-        // После загрузки данных запускаем отрисовку
+        // Если данные пришли, запускаем отрисовку
         renderMenu();
         updateOrderUI();
 
     } catch (error) {
         console.error('Ошибка при загрузке блюд:', error);
-        // Если данные не загрузились, показываем сообщение пользователю
-        const mainElement = document.querySelector('main');
+        
+        // Если загрузка не удалась, показываем сообщение
         if (mainElement) {
             mainElement.innerHTML = `
-                <div style="text-align: center; padding: 50px; background: #fff; border-radius: 20px;">
-                    <h2>😔 Ошибка загрузки меню</h2>
-                    <p>Не удалось загрузить данные с сервера. Проверьте подключение к интернету или попробуйте позже.</p>
+                <div style="text-align: center; padding: 50px; background: #fff; border-radius: 20px; max-width: 600px; margin: 20px auto;">
+                    <h2>😔 Не удалось загрузить меню</h2>
+                    <p style="color: #666;">Сервер временно недоступен. Пожалуйста, обновите страницу через несколько секунд.</p>
+                    <button onclick="location.reload()" style="padding: 10px 20px; margin-top: 20px; background: tomato; color: #fff; border: none; border-radius: 10px; cursor: pointer;">Обновить страницу</button>
                 </div>
             `;
         }
     }
 }
 
-// ==========================================
-// ОСТАЛЬНАЯ ЛОГИКА (БЕЗ ИЗМЕНЕНИЙ, ИСПОЛЬЗУЕТ ПЕРЕМЕННУЮ dishes)
-// ==========================================
-
+// ========== ОТРИСОВКА ==========
 function sortDishesByAlphabet(arr) {
     return arr.sort((a, b) => a.name.localeCompare(b.name));
 }
@@ -93,6 +89,7 @@ function renderMenu() {
     setupFilters();
 }
 
+// ========== ФИЛЬТРЫ ==========
 function setupFilters() {
     const categories = ['soup', 'main', 'starter', 'drink', 'dessert'];
 
@@ -155,6 +152,7 @@ function renderDishesInContainer(container, dishesArray) {
     updateOrderUI();
 }
 
+// ========== ДОБАВЛЕНИЕ В КОРЗИНУ ==========
 function handleAddClick(event) {
     var card = event.target.closest('.menu-card');
     var dishKeyword = card.dataset.dish;
@@ -247,10 +245,7 @@ function updateOrderUI() {
     });
 }
 
-// ==========================================
-// УВЕДОМЛЕНИЯ И ПРОВЕРКА ЗАКАЗА (ИЗ ЛР 6)
-// ==========================================
-
+// ========== УВЕДОМЛЕНИЯ ==========
 function showModal(emoji, text) {
     var existingModal = document.querySelector('.modal-overlay');
     if (existingModal) {
@@ -299,21 +294,11 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
         return;
     }
 
-    if (isSoup && isMain && isStarter && isDrink) {
-        return;
-    }
-    if (isSoup && isMain && isDrink && !isStarter) {
-        return;
-    }
-    if (isSoup && isStarter && isDrink && !isMain) {
-        return;
-    }
-    if (isMain && isStarter && isDrink && !isSoup) {
-        return;
-    }
-    if (isMain && isDrink && !isSoup && !isStarter) {
-        return;
-    }
+    if (isSoup && isMain && isStarter && isDrink) return;
+    if (isSoup && isMain && isDrink && !isStarter) return;
+    if (isSoup && isStarter && isDrink && !isMain) return;
+    if (isMain && isStarter && isDrink && !isSoup) return;
+    if (isMain && isDrink && !isSoup && !isStarter) return;
 
     event.preventDefault();
 
@@ -340,10 +325,7 @@ document.getElementById('orderForm').addEventListener('submit', function(event) 
     showModal('🤔', 'Выберите блюда, чтобы собрать один из вариантов ланча');
 });
 
-// ==========================================
-// ЗАПУСК
-// ==========================================
+// ========== ЗАПУСК ==========
 document.addEventListener('DOMContentLoaded', function() {
-    // Вместо renderMenu() вызываем функцию загрузки данных
     loadDishes();
 });
