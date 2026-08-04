@@ -16,7 +16,7 @@ const selectedDishes = {
 // ==========================================
 async function loadDishes() {
     
-    const apiUrl = 'https://corsproxy.io/?https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
+    const apiUrl = 'https://cors-proxy.htmldog.workers.dev/?https://edu.std-900.ist.mospolytech.ru/labs/api/dishes';
 
     try {
         const response = await fetch(apiUrl);
