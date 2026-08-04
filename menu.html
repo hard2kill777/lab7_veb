@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Собрать ланч - Food Construct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Food Construct</h1>
+        <nav>
+            <a href="index.html">О нас</a>
+            <a href="menu.html" class="active">Собрать ланч</a>
+            <a href="#">Заказы</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- БЛОК ВАРИАНТОВ ЛАНЧА (ЛР 6) -->
+        <section>
+            <h2>Готовые варианты ланча</h2>
+            <div class="lunch-variants-grid" id="lunch-variants">
+                <!-- Вариант 1: Суп + Главное + Салат + Напиток -->
+                <div class="variant-card">
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=150&h=150&fit=crop" alt="Суп"><span>Суп</span></div>
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1579631542720-3a87824fff86?w=150&h=150&fit=crop" alt="Главное"><span>Главное блюдо</span></div>
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=150&h=150&fit=crop" alt="Салат"><span>Салат</span></div>
+                    <div class="variant-item"><img src="https://www.yamdiet.com/wp-content/uploads/02-6.jpg?w=150&h=150&fit=crop" alt="Напиток"><span>Напиток</span></div>
+                    <p class="variant-note">+ Десерт по желанию</p>
+                </div>
+                
+                <!-- Вариант 2: Суп + Главное + Напиток -->
+                <div class="variant-card">
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=150&h=150&fit=crop" alt="Суп"><span>Суп</span></div>
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1579631542720-3a87824fff86?w=150&h=150&fit=crop" alt="Главное"><span>Главное блюдо</span></div>
+                    <div class="variant-item"><img src="https://www.yamdiet.com/wp-content/uploads/02-6.jpg?w=150&h=150&fit=crop" alt="Напиток"><span>Напиток</span></div>
+                    <p class="variant-note">+ Десерт по желанию</p>
+                </div>
+                
+                <!-- Вариант 3: Суп + Салат + Напиток -->
+                <div class="variant-card">
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=150&h=150&fit=crop" alt="Суп"><span>Суп</span></div>
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=150&h=150&fit=crop" alt="Салат"><span>Салат</span></div>
+                    <div class="variant-item"><img src="https://www.yamdiet.com/wp-content/uploads/02-6.jpg?w=150&h=150&fit=crop" alt="Напиток"><span>Напиток</span></div>
+                    <p class="variant-note">+ Десерт по желанию</p>
+                </div>
+                
+                <!-- Вариант 4: Главное + Салат + Напиток -->
+                <div class="variant-card">
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1579631542720-3a87824fff86?w=150&h=150&fit=crop" alt="Главное"><span>Главное блюдо</span></div>
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=150&h=150&fit=crop" alt="Салат"><span>Салат</span></div>
+                    <div class="variant-item"><img src="https://www.yamdiet.com/wp-content/uploads/02-6.jpg?w=150&h=150&fit=crop" alt="Напиток"><span>Напиток</span></div>
+                    <p class="variant-note">+ Десерт по желанию</p>
+                </div>
+                
+                <!-- Вариант 5: Главное + Напиток -->
+                <div class="variant-card">
+                    <div class="variant-item"><img src="https://images.unsplash.com/photo-1579631542720-3a87824fff86?w=150&h=150&fit=crop" alt="Главное"><span>Главное блюдо</span></div>
+                    <div class="variant-item"><img src="https://www.yamdiet.com/wp-content/uploads/02-6.jpg?w=150&h=150&fit=crop" alt="Напиток"><span>Напиток</span></div>
+                    <p class="variant-note">+ Десерт по желанию</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- СУПЫ -->
+        <section>
+            <h2>Выберите первое блюдо</h2>
+            <div class="filters" id="filters-soup">
+                <button class="filter-btn" data-kind="fish">рыбный</button>
+                <button class="filter-btn" data-kind="meat">мясной</button>
+                <button class="filter-btn" data-kind="veg">вегетарианский</button>
+            </div>
+            <div class="menu-grid" id="menu-soup"></div>
+        </section>
+
+        <!-- ГЛАВНЫЕ БЛЮДА -->
+        <section>
+            <h2>Выберите главное блюдо</h2>
+            <div class="filters" id="filters-main">
+                <button class="filter-btn" data-kind="fish">рыбное</button>
+                <button class="filter-btn" data-kind="meat">мясное</button>
+                <button class="filter-btn" data-kind="veg">вегетарианское</button>
+            </div>
+            <div class="menu-grid" id="menu-main"></div>
+        </section>
+
+        <!-- САЛАТЫ -->
+        <section>
+            <h2>Выберите салат или стартер</h2>
+            <div class="filters" id="filters-starter">
+                <button class="filter-btn" data-kind="fish">рыбный</button>
+                <button class="filter-btn" data-kind="meat">мясной</button>
+                <button class="filter-btn" data-kind="veg">вегетарианский</button>
+            </div>
+            <div class="menu-grid" id="menu-starter"></div>
+        </section>
+
+        <!-- НАПИТКИ -->
+        <section>
+            <h2>Выберите напиток</h2>
+            <div class="filters" id="filters-drink">
+                <button class="filter-btn" data-kind="cold">холодный</button>
+                <button class="filter-btn" data-kind="hot">горячий</button>
+            </div>
+            <div class="menu-grid" id="menu-drink"></div>
+        </section>
+
+        <!-- ДЕСЕРТЫ -->
+        <section>
+            <h2>Выберите десерт</h2>
+            <div class="filters" id="filters-dessert">
+                <button class="filter-btn" data-kind="small">маленькая порция</button>
+                <button class="filter-btn" data-kind="medium">средняя порция</button>
+                <button class="filter-btn" data-kind="large">большая порция</button>
+            </div>
+            <div class="menu-grid" id="menu-dessert"></div>
+        </section>
+
+        <!-- ФОРМА ЗАКАЗА -->
+        <section class="order-section">
+            <h2>Оформите заказ</h2>
+            <form class="order-form" id="orderForm" action="https://httpbin.org/post" method="POST">
+                <div id="hidden-inputs-container"></div>
+                
+                <div class="order-column">
+                    <h3>Ваш заказ</h3>
+                    <div class="order-summary">
+                        <div class="selected-section" id="selected-soup"><h4>Суп</h4><div class="selected-content"></div></div>
+                        <div class="selected-section" id="selected-main"><h4>Главное блюдо</h4><div class="selected-content"></div></div>
+                        <div class="selected-section" id="selected-starter"><h4>Салат/Стартер</h4><div class="selected-content"></div></div>
+                        <div class="selected-section" id="selected-drink"><h4>Напиток</h4><div class="selected-content"></div></div>
+                        <div class="selected-section" id="selected-dessert"><h4>Десерт</h4><div class="selected-content"></div></div>
+                        <div id="order-total">Стоимость заказа: <span id="total-price">0</span> руб.</div>
+                    </div>
+                </div>
+
+                <div class="order-column">
+                    <h3>Ваши данные</h3>
+                    <div class="form-group"><label for="name">Имя *</label><input type="text" id="name" name="name" placeholder="Иван Иванов" required></div>
+                    <div class="form-group"><label for="email">Email *</label><input type="email" id="email" name="email" placeholder="example@mail.ru" required></div>
+                    <div class="form-group checkbox-group"><input type="checkbox" id="subscribe" name="subscribe" checked><label for="subscribe">Подписаться на новости и акции</label></div>
+                    <div class="form-group"><label for="phone">Телефон *</label><input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required></div>
+                    <div class="form-group"><label for="address">Адрес доставки *</label><input type="text" id="address" name="address" placeholder="Москва, ул. Пушкина, д. 1" required></div>
+                    <fieldset>
+                        <legend>Время доставки</legend>
+                        <div class="radio-group">
+                            <label><input type="radio" name="delivery_time" value="asap" required> Как можно скорее</label>
+                            <label><input type="radio" name="delivery_time" value="custom"> Указать время</label>
+                        </div>
+                        <div class="form-group" style="margin-top: 15px;">
+                            <label for="exact_time">Укажите время</label>
+                            <input type="time" id="exact_time" name="exact_time" min="07:00" max="23:00" step="300">
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="form-actions">
+                    <button type="reset" class="btn-reset">Сбросить</button>
+                    <button type="submit" class="btn-submit" id="submitBtn">Отправить</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer id="contacts">
+        <div><p><a href="tel:+74951234567">+7 (495) 123-45-67</a></p><p><a href="mailto:order@foodconstruct.ru">order@foodconstruct.ru</a></p></div>
+        <div><p>Москва, ул. Тверская, д. 12, оф. 305</p><p>&copy; 2026 Food Construct</p></div>
+    </footer>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
