@@ -1,5 +1,7 @@
-﻿﻿// data.js
-const dishes = [
+/* data.js - Локальный источник данных */
+
+// Это имя переменной (dishesBackup) должен видеть script.js
+const dishesBackup = [
     // ===== СУПЫ (6 шт) =====
     { keyword: "gaspacho", name: "Гаспачо", price: 195, category: "soup", kind: "veg", count: "350 г", image: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=400&h=400&fit=crop" },
     { keyword: "mushroom_soup", name: "Грибной суп-пюре", price: 185, category: "soup", kind: "veg", count: "330 г", image: "https://images.unsplash.com/photo-1604152135912-04a022e23696?w=400&h=400&fit=crop" },
